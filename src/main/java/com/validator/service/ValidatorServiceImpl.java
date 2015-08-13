@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Kalvin on 8/11/2015.
  */
-@Service
+
 public class ValidatorServiceImpl implements ValidatorService {
     @Autowired private AlphaNumericValidatorAlgoImpl alphaNumeric;
     @Autowired private CorrectLengthValidatorAlgoImpl correctLengthValidatorAlgo;
@@ -22,8 +22,11 @@ public class ValidatorServiceImpl implements ValidatorService {
 
     private List<ValidatorAlgo> validationAlgos;
 
-
+    ValidatorServiceImpl(){
+        System.out.println("default");
+    }
     ValidatorServiceImpl(ValidatorAlgo ... args){
+        System.out.println("custom");
         for(ValidatorAlgo arg : args){
             System.out.println(arg);
         }

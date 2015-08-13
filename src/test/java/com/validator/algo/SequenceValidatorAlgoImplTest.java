@@ -1,6 +1,5 @@
 package com.validator.algo;
 
-import com.validator.domain.Password;
 import com.validator.password.init.Application;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,9 +18,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class AlphaNumericValidatorAlgoImplTest {
+public class SequenceValidatorAlgoImplTest {
 
-    static Logger logger = LoggerFactory.getLogger(AlphaNumericValidatorAlgoImplTest.class);
+    static Logger logger = LoggerFactory.getLogger(SequenceValidatorAlgoImplTest.class);
 
     @Autowired AlphaNumericValidatorAlgoImpl alphaNumericValidatorAlgo;
 

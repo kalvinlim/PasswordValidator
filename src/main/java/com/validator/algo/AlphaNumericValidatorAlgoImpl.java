@@ -9,10 +9,13 @@ import java.util.regex.Pattern;
  * Created by Kalvin on 8/11/2015.
  */
 @Component
+/**
+ * Algo to check if alpha-numeric (lowercase only), with at least 1 alpha & 1 numeric
+ */
 public class AlphaNumericValidatorAlgoImpl implements ValidatorAlgo {
     @Override
-    public Boolean isValid(Password password) {
-        String r = "^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$";
-        return Pattern.matches(r, password.getText());
+    public Boolean isValid(String passwordString) {
+        String regexExpression = "^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$";
+        return Pattern.matches(regexExpression, passwordString);
     }
 }

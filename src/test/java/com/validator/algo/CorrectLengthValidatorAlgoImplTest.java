@@ -37,12 +37,7 @@ public class CorrectLengthValidatorAlgoImplTest {
 
     @Test
     public void isValidTest(){
-        assert !correctLengthValidatorAlgo.isValid("1");
-        assert !correctLengthValidatorAlgo.isValid("1a");
-        assert !correctLengthValidatorAlgo.isValid("aa1");
-        assert !correctLengthValidatorAlgo.isValid("a1a1");
-        assert !correctLengthValidatorAlgo.isValid("1a15a");
-
+        assert correctLengthValidatorAlgo.isValid("1a15a");
         assert correctLengthValidatorAlgo.isValid("1a15aw"); //6
         assert correctLengthValidatorAlgo.isValid("1a15aje");  //7
         assert correctLengthValidatorAlgo.isValid("1a151hed");
@@ -50,7 +45,21 @@ public class CorrectLengthValidatorAlgoImplTest {
         assert correctLengthValidatorAlgo.isValid("1a15djwie0");
         assert correctLengthValidatorAlgo.isValid("1a15dhf2yw7");
         assert correctLengthValidatorAlgo.isValid("123456789012"); //12
-
+    }
+    @Test
+    public void inValidIfLessThanFive(){
+        assert !correctLengthValidatorAlgo.isValid("1");
+        assert !correctLengthValidatorAlgo.isValid("1a");
+        assert !correctLengthValidatorAlgo.isValid("aa1");
+        assert !correctLengthValidatorAlgo.isValid("a1a1");
+    }
+    @Test
+    public void inValidIfMoreThanTwelve(){
         assert !correctLengthValidatorAlgo.isValid("1234567890121");
+    }
+
+    @Test
+    public void testErrorMessage(){
+        assert correctLengthValidatorAlgo.getErrorMessage() != null;
     }
 }

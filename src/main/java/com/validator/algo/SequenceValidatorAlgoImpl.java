@@ -1,7 +1,9 @@
 package com.validator.algo;
 
-import com.validator.domain.Password;
 import org.springframework.stereotype.Component;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Kalvin on 8/12/2015.
@@ -14,6 +16,16 @@ import org.springframework.stereotype.Component;
 public class SequenceValidatorAlgoImpl implements ValidatorAlgo{
     @Override
     public Boolean isValid(String passwordString) {
-        return null;
+        String regexExpression = "([^.]{2,})\\1{1,}";
+
+        Pattern p = Pattern.compile(regexExpression);
+        Matcher m = p.matcher(passwordString);
+
+        return !m.find();
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return "Must not contain any sequence of characters immediately followed by the same sequence";
     }
 }

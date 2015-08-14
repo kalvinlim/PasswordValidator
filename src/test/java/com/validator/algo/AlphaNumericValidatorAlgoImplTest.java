@@ -1,6 +1,5 @@
 package com.validator.algo;
 
-import com.validator.domain.Password;
 import com.validator.password.init.Application;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +42,26 @@ public class AlphaNumericValidatorAlgoImplTest {
         assert alphaNumericValidatorAlgo.isValid("aa11");
         assert alphaNumericValidatorAlgo.isValid("a1a1");
         assert alphaNumericValidatorAlgo.isValid("1a1a");
+    }
+
+    @Test
+    public void invalid(){
         assert !alphaNumericValidatorAlgo.isValid("!!!!");
+        assert !alphaNumericValidatorAlgo.isValid("a1,/.,./");
+        assert !alphaNumericValidatorAlgo.isValid("!@#^@!#$");
+        assert !alphaNumericValidatorAlgo.isValid("a12d21.123");
+    }
+    @Test
+    public void upperCaseInvalid(){
+        assert !alphaNumericValidatorAlgo.isValid("A1");
+        assert !alphaNumericValidatorAlgo.isValid("1A");
+        assert !alphaNumericValidatorAlgo.isValid("A!");
+        assert !alphaNumericValidatorAlgo.isValid("!A");
+    }
+
+
+    @Test
+    public void testErrorMessage(){
+        assert alphaNumericValidatorAlgo.getErrorMessage() != null;
     }
 }

@@ -5,10 +5,13 @@ import com.validator.algo.CorrectLengthValidatorAlgoImpl;
 import com.validator.algo.SequenceValidatorAlgoImpl;
 import com.validator.algo.ValidatorAlgo;
 import com.validator.domain.Password;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,20 +23,33 @@ public class ValidatorServiceImpl implements ValidatorService {
     @Autowired private CorrectLengthValidatorAlgoImpl correctLengthValidatorAlgo;
     @Autowired private SequenceValidatorAlgoImpl sequenceValidatorAlgo;
 
-    private List<ValidatorAlgo> validationAlgos;
+    private List<ValidatorAlgo> validationAlgos = new ArrayList<>();
 
-    ValidatorServiceImpl(){
-        System.out.println("default");
-    }
+    static Logger logger = LoggerFactory.getLogger(ValidatorServiceImpl.class);
+
+    ValidatorServiceImpl(){}
     ValidatorServiceImpl(ValidatorAlgo ... args){
-        System.out.println("custom");
         for(ValidatorAlgo arg : args){
-            System.out.println(arg);
+            validationAlgos.add(arg);
         }
     }
 
     @Override
-    public Boolean validate(Password password) {
-        return null;
+    public Password validate(String text) {
+        Boolean result = true;
+        Password password = new Password(text);
+
+        //If we don't do this and call validate mulitple times, the error list will duplicate
+        password.getErrorsList().clear();
+
+        for(ValidatorAlgo algo : validationAlgos){
+            result = algo.isValid(password.getText());
+            if(!result){
+                password.appendError(algo.getErrorMessage());
+            }
+        }
+
+        password.setValid(password.getErrorsList().size() > 0 ? false : true);
+        return password;
     }
 }

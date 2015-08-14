@@ -1,6 +1,5 @@
 package com.validator.algo;
 
-import com.validator.domain.Password;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;
@@ -15,7 +14,12 @@ import java.util.regex.Pattern;
 public class CorrectLengthValidatorAlgoImpl implements ValidatorAlgo {
     @Override
     public Boolean isValid(String passwordString) {
-        String regexExpression = "^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$";
+        String regexExpression = "^.{5,12}$";
         return Pattern.matches(regexExpression, passwordString);
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return "Must be between 5-12 characters in length";
     }
 }

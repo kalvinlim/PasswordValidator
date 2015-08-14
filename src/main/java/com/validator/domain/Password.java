@@ -1,11 +1,19 @@
 package com.validator.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Kalvin on 8/11/2015.
  */
 public class Password {
     private String text;
     private Boolean valid;
+    private List<String> errorsList = new ArrayList<>();
+
+    public Password(String text){
+        this.text = text;
+    }
 
     public String getText() {
         return text;
@@ -23,4 +31,11 @@ public class Password {
         this.valid = valid;
     }
 
+    public void appendError(String error){
+        errorsList.add(error);
+    }
+
+    public List<String> getErrorsList() {
+        return errorsList;
+    }
 }

@@ -5,11 +5,13 @@ Written in IntelliJ IDEA 14.1.4, Maven, JDK 1.8.0_40, Windows 10
 --------------------------------------------------------------------------------------
 To run:
 
-IntelliJ- Import project and run Spring Boot main class: com.validator.password.init.Application
+IntelliJ- Import project, pull down maven dependencies and run Spring Boot main class: com.validator.password.init.Application
 
 -- or --
 
-Git Bash: $ mvn package && java -jar target/PasswordValidator-1.0-SNAPSHOT.jar
+Git Bash: In the root folder where the pom.xml is, run
+
+$ mvn package && java -jar target/PasswordValidator-1.0-SNAPSHOT.jar
 
 --------------------------------------------------------------------------------------
 To configure validation algorithms:
